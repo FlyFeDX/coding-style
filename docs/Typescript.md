@@ -177,7 +177,7 @@
 
 #### Aliases
 
-When creating a local-scope alias of an existing symbol, use the format of the existing identifier. The local alias must match the existing naming and format of the source. For variables use `const` for your local aliases, and for class fields use the `readonly` attribute.
+当创建本地作用域的别名时, 使用被起别名对象的命名格式. 本地别名必须与源的现有名称和格式匹配. 对于变量，请使用' const '作为局部别名，对于类字段，请使用' readonly '属性。 .
 
 ```ts
 const { Foo } = SomeType;
@@ -191,25 +191,25 @@ class Teapot {
 
 #### Naming style
 
-TypeScript expresses information in types, so names *should not* be decorated with information that is included in the type.
+TypeScript用类型来表达信息，所以名字*不应该*用类型中包含的信息来装饰
 
-Some concrete examples of this rule:
+这条规则的一些具体例子:
 
-- Do not use trailing or leading underscores for private properties or methods.
-- Do not use the `opt\_` prefix for optional parameters.
-  - For accessors, see accessor rules below.
-- Do not mark interfaces specially (~~`IMyInterface`~~ or ~~`MyFooInterface`~~) unless it's idiomatic in its environment. When introducing an interface for a class, give it a name that expresses why the interface exists in the first place (e.g. `class TodoItem` and `interface TodoItemStorage`if the interface expresses the format used for storage/serialization in JSON).
-- Suffixing `Observable`s with `$` is a common external convention and can help resolve confusion regarding observable values vs concrete values. Judgement on whether this is a useful convention is left up to individual teams, but *should* be consistent within projects.
+- 不要为私有属性或方法使用尾随或前导下划线
+- 不使用`opt_`等作为可选参数的前缀.
+  - 对于访问器，请参阅下面的访问器规则.
+- 不要对接口使用特殊的标记 (~~`IMyInterface`~~ 或 ~~`MyFooInterface`~~) 除非它定义的环境中有特定的含义. 当为类引入接口时, 要通过类名表达为什么要实现这个接口 (比如: `class TodoItem` 和 `interface TodoItemStorage` (接口用于存储/序列化等功能)).
+- `Observable`后面加上`$`是一种常见的外部约定，可以帮助解决Observable值和具体值之间的混淆.
 
 #### Descriptive names
 
-Names *must* be descriptive and clear to a new reader. Do not use abbreviations that are ambiguous or unfamiliar to readers outside your project, and do not abbreviate by deleting letters within a word.
+名称必须对研发人员具有描述性和清晰性. 不要使用模棱两可或对项目外的读者不熟悉的缩写，也不要通过删除单词中的字母来缩写.
 
-- **Exception**: Variables that are in scope for 10 lines or fewer, including arguments that are *not* part of an exported API, *may* use short (e.g. single letter) variable names.
+- **例外情况**: 在10行或更少范围内的变量，包括不属于导出API的参数，可以使用较短的(例如单字母)变量名.
 
 ### File encoding: UTF-8
 
-For non-ASCII characters, use the actual Unicode character (e.g. `∞`). For non-printable characters, the equivalent hex or Unicode escapes (e.g. `\u221e`) can be used along with an explanatory comment.
+对于非ascii字符，使用实际的Unicode字符 (例如: `∞`). 对于不可打印字符，等效的十六进制或Unicode转义 (例如: `\u221e`) 可以与解释性注释一起使用.
 
 ```ts
 // Good
@@ -229,18 +229,16 @@ const output = "\\ufeff" + content;
 
 ### Source Code Formatting
 
-Source code formatting can be completely automated. Humans should not waste time arguing about comma placement in code reviews.
-
-In very rare situations (e.g. long multiline container literals or formatting bugs that cause semantic issues), it can be necessary to disable formatter for a section. Use this only where absolutely needed.
+代码格式化可以完全自动化. 我们不应该浪费时间争论代码检查中逗号的位置等情况.
 
 ### Comments & Documentation
 
 #### JSDoc vs comments
 
-There are two types of comments, JSDoc (`/** ... _/`) and non-JSDoc ordinary comments (`// ...` or `/_ ... \*/`).
+有两种类型的注释, JSDoc (`/** ... _/`) 和 普通注释 (`// ...` or `/_ ... \*/`).
 
-- Use `/** JSDoc _/` comments for documentation, i.e. comments a user of the code should read.
-- Use `// line comments` for implementation comments, i.e. comments that only concern the implementation of the code itself.
+- 使用 `/** JSDoc _/` 为文档注释, 比如: 代码用户应该阅读的注释
+- 使用 `// line comments` 为实现注释, 比如: 只涉及代码本身实现的注释
 
 ```ts
 // Bad
@@ -251,40 +249,38 @@ const active: boolean = true;  // is current tab
 const active: boolean = true;
 ```
 
-JSDoc comments are understood by tools (such as editors and documentation generators), while ordinary comments are only for other humans.
+JSDoc注释可以被工具(比如编辑器和文档生成器)理解，而普通注释只供其他人使用。
 
 #### JSDoc rules follow the JavaScript style
 
-In general, follow the JavaScript style guides rules for JSDoc, sections 7.1 - 7.5. The remainder of this section describes exceptions to those rules.
+一般来说，遵循JSDoc的JavaScript样式指南规则.本节的其余部分将描述这些规则的例外情况.
 
 #### Document all top-level exports of modules
 
-Use `/\*\* JSDoc _/` comments to communicate information to the users of your code. Avoid merely restating the property or parameter name. You *should* also document all properties and methods (exported/public or not) whose purpose is not immediately obvious from their name, as judged by your reviewer.
-
-Exception: Symbols that are only exported to be consumed by tooling, such as @NgModule classes, do not require comments.
+使用`/** JSDoc _/`注释将信息传达给代码的用户. 避免仅仅重述属性或参数名称. 所以需要将导出的模块使用`/** JSDoc _/`注释.
 
 #### Omit comments that are redundant with TypeScript
 
-For example, do not declare types in `@param` or `@return` blocks, do not write `@implements`, `@enum`, `@private` etc. on code that uses the `implements`, `enum`, `private` etc. keywords.
+例如, 不要在 `@param` 或 `@return` 块中声明类型, 不要在使用 `implements`, `enum`, `private` 等关键字的代码上写入 `@implements`, `@enum`, `@private` 等关键字.
 
 #### Do not use `@override`
 
-Do not use `@override` in TypeScript source code.
+不要在TypeScript代码中使用 `@override`.
 
-`@override` is not enforced by the compiler, which is surprising and leads to annotations and implementation going out of sync. Including it purely for documentation purposes is confusing.
+`@override` 导致注释和实现不同步. 纯粹出于文档目的而包含它不是很好.
 
 #### Make comments that actually add information
 
-For non-exported symbols, sometimes the name and type of the function or parameter is enough. Code will *usually* benefit from more documentation than just variable names though!
+对于未导出的方法或者对象, 函数或参数额名称和类型就足够了.
 
-- Avoid comments that just restate the parameter name and type, e.g.
+- 只重复参数名称和类型的注释无效，例如:
 
     ```ts
     // Bad
     /** @param fooBarService The Bar service for the Foo application. */
     ```
 
-- Because of this rule, `@param` and `@return` lines are only required when they add information, and may otherwise be omitted.
+- 因此 `@param` 和 `@return` 行只有在添加信息时才需要，否则可能会被省略.
 
     ```ts
     // Good
@@ -299,9 +295,9 @@ For non-exported symbols, sometimes the name and type of the function or paramet
 
 #### Parameter property comments
 
-A parameter property is when a class declares a field and a constructor parameter in a single declaration, by marking a parameter in the constructor. E.g. `constructor(private readonly foo: Foo)`, declares that the class has a `foo` field.
+参数属性是当类在单个声明中声明一个字段和一个构造函数参数时，通过在构造函数中标记一个参数. 例如: `constructor(private readonly foo: Foo)`,声明该类有一个 `foo` 字段.
 
-To document these fields, use JSDocs `@param` annotation. Editors display the description on constructor calls and property accesses.
+让这些字段文档化, 使用 JSDocs `@param` 声明. 编辑器在构造函数调用和属性访问上显示描述.
 
 ```ts
 /** This class demonstrates how parameter properties are documented. */
@@ -329,7 +325,8 @@ class OrdinaryClass {
 
 #### Comments when calling a function
 
-If needed, document parameters at call sites inline using block comments. Also consider named parameters using object literals and destructuring. The exact formatting and placement of the comment is not prescribed.
+如果需要，使用块注释内联调用站点的文档参数。
+还要考虑使用对象字面量和解构的命名参数。 注释的确切格式和位置没有规定。
 
 ```ts
 // Inline block comments for parameters that'd be hard to understand:
@@ -354,9 +351,9 @@ export class Percolator implements CoffeeBrewer {
 
 #### Place documentation prior to decorators
 
-When a class, method, or property have both decorators like `@Component` and JsDoc, please make sure to write the JsDoc before the decorator.
+当一个类、方法或属性同时拥有 `@Component` 和 JsDoc 这样的装饰器时, 请确保在装饰器之前写JsDoc。 .
 
-- Do not write JsDoc between the Decorator and the decorated statement.
+- 不要在Decorator和Decorator语句之间写JsDoc。
 
     ```ts
     // Bad
@@ -368,7 +365,7 @@ When a class, method, or property have both decorators like `@Component` and JsD
     export class FooComponent {}
     ```
 
-- Write the JsDoc block before the Decorator.
+- 在Decorator之前编写JsDoc块
 
     ```ts
     // Good
@@ -384,33 +381,33 @@ When a class, method, or property have both decorators like `@Component` and JsD
 
 ### Visibility
 
-Restricting visibility of properties, methods, and entire types helps with keeping code decoupled.
+限制属性、方法和整个类型的可见性有助于保持代码的解耦.
 
-- Limit symbol visibility as much as possible.
-- Consider converting private methods to non-exported functions within the same file but outside of any class, and moving private properties into a separate, non-exported class.
-- TypeScript symbols are public by default. Never use the `public` modifier except when declaring non-readonly public parameter properties (in constructors).
+- 尽可能的限制 symbol 的可见性.
+- 考虑将私有方法转换为同一文件中任何类之外的非导出函数，并将私有属性移动到单独的非导出类中.
+- TypeScript symbols 默认是公共的. 永远不要使用 `public` 修饰符，除非在构造函数中声明非只读公共参数属性.
 
     ```ts
     class Foo {
-      public bar = new Bar(); // BAD: public modifier not needed
+        public bar = new Bar(); // BAD: public modifier not needed
 
-      constructor(public readonly baz: Baz) {} // BAD: readonly implies it's a property which defaults to public
+        constructor(public readonly baz: Baz) {} // BAD: readonly implies it's a property which defaults to public
     }
     ```
 
     ```ts
     class Foo {
-      bar = new Bar(); // GOOD: public modifier not needed
+        bar = new Bar(); // GOOD: public modifier not needed
 
-      constructor(public baz: Baz) {} // public modifier allowed
+        constructor(public baz: Baz) {} // public modifier allowed
     }
     ```
 
-See also [export visibility](#Export-visibility) below.
+下方 [export visibility](#Export-visibility).
 
 ### Constructors
 
-Constructor calls must use parentheses, even when no arguments are passed:
+即使没有传递参数, 构造函数调用也必须使用圆括号:
 
   ```ts
   // Bad
@@ -422,21 +419,22 @@ Constructor calls must use parentheses, even when no arguments are passed:
   const x = new Foo();
   ```
 
-It is unnecessary to provide an empty constructor or one that simply delegates into its parent class because ES2015 provides a default class constructor if one is not specified. However constructors with parameter properties, modifiers or parameter decorators should not be omitted even if the body of the constructor is empty.
+请省略掉空的构造函数或只委托给父类的构造函数，因为如果没有指定，ES2015会提供默认的类构造函数.
+但是，即使构造函数体为空，也不应该省略带有形参属性、修饰符或形参修饰符的构造函数.
 
   ```ts
   // Bad
   class UnnecessaryConstructor {
-    constructor() {}
+      constructor() {}
   }
   ```
 
   ```ts
   // Bad
   class UnnecessaryConstructorOverride extends Base {
-    constructor(value: number) {
-    super(value);
-    }
+      constructor(value: number) {
+      super(value);
+      }
   }
   ```
 
@@ -445,15 +443,15 @@ It is unnecessary to provide an empty constructor or one that simply delegates i
   class DefaultConstructor {}
 
   class ParameterProperties {
-    constructor(private myService) {}
+      constructor(private myService) {}
   }
 
   class ParameterDecorators {
-    constructor(@SideEffectDecorator myService) {}
+      constructor(@SideEffectDecorator myService) {}
   }
 
   class NoInstantiation {
-    private constructor() {}
+      private constructor() {}
   }
   ```
 
@@ -461,35 +459,31 @@ It is unnecessary to provide an empty constructor or one that simply delegates i
 
 #### No `#private` fields
 
-Do not use private fields (also known as private identifiers):
+不要使用#作为私有字段的标识符:
 
-    ```ts
-    // Bad
-    class Clazz {
+  ```ts
+  // Bad
+  class Clazz {
       #ident = 1;
-    }
-    ```
+  }
+  ```
 
-Instead, use TypeScripts visibility annotations:
+显式声明private字段:
 
   ```ts
   // Good
   class Clazz {
-    private ident = 1;
+      private ident = 1;
   }
   ```
 
-> Why?
->
-> Private identifiers cause substantial emit size and performance regressions when down-leveled by TypeScript, and are unsupported before ES2015. At the same time, they do not offer substantial benefits when static type checking is used to enforce visibility.
-
 #### Use `readonly`
 
-Mark properties that are never reassigned outside of the constructor with the `readonly` modifier (these need not be deeply immutable).
+使用 `readonly` 修饰符标记从未在构造函数外部重新赋值的属性(这些不需要是深度不可变的)
 
 #### Parameter properties
 
-Rather than plumbing an obvious initializer through to a class member, use a TypeScript parameter property.
+不要把一个明显的初始化式传递给类成员，而是使用TypeScript的形参属性。
 
 ```ts
 // Bad
@@ -497,7 +491,7 @@ class Foo {
   private readonly barService: BarService;
 
   constructor(barService: BarService) {
-    this.barService = barService;
+      this.barService = barService;
   }
 }
 ```
@@ -505,22 +499,22 @@ class Foo {
 ```ts
 // Good
 class Foo {
-  constructor(private readonly barService: BarService) {}
+    constructor(private readonly barService: BarService) {}
 }
 ```
 
-If the parameter property needs documentation, use an `@param` [JSDoc](#parameter-property-comments) tag.
+如果参数属性需要文档, 使用`@param` [JSDoc](#parameter-property-comments) 标记.
 
 #### Field initializers
 
-If a class member is not a parameter, initialize it where its declared, which sometimes lets you drop the constructor entirely.
+如果类成员不是形参，则在声明它的地方初始化它，因为这有时可以让你完全删除构造函数。
 
 ```ts
 // Bad
 class Foo {
   private readonly userList: string[];
   constructor() {
-    this.userList = [];
+      this.userList = [];
   }
 }
 ```
@@ -528,48 +522,48 @@ class Foo {
 ```ts
 // Good
 class Foo {
-  private readonly userList: string[] = [];
+    private readonly userList: string[] = [];
 }
 ```
 
 #### Properties used outside of class lexical scope
 
-Properties used from outside the lexical scope of their containing class, such as an AngularJS controllers properties used from a template, must not use `private` visibility, as they are used outside of the lexical scope of their containing class.
+在其包含类的词法作用域之外使用的属性，比如从模板中使用的AngularJS控制器属性，不能使用`private`可见性，因为它们是在其包含类的词法作用域之外使用的.
 
-Prefer `public` visibility for these properties, however `protected` visibility can also be used as needed. For example, Angular and Polymer template properties should use `public`, but AngularJS should use `protected`.
+这些属性最好是 `public` 的, 但是 `protected` 也可以根据需要使用. 比如, Angular 和 Polymer 模板属性应该使用 `public`, 而 AngularJS 应该使用 `protected`.
 
 #### Getters and Setters (Accessors)
 
-Warning: Getters and setters have to be transpiled into bloated code. It is a good practice to avoid using getters and setters in general.
+通常避免使用getter和setter是一个很好的实践。
 
-Getters and setters for class members may be used. The getter method must be a pure function (i.e., result is consistent and has no side effects). They are also useful as a means of restricting the visibility of internal or verbose implementation details (shown below).
+可以使用类成员的getter和setter。 getter方法必须是一个纯函数(即，结果是一致的，没有副作用)。 它们还可以用来限制内部或详细实现细节的可见性(如下所示)。
 
 ```ts
 class Foo {
   constructor(private readonly someService: SomeService) {}
 
   get someMember(): string {
-    return this.someService.someVariable;
+      return this.someService.someVariable;
   }
 
   set someMember(newValue: string) {
-    this.someService.someVariable = newValue;
+      this.someService.someVariable = newValue;
   }
 }
 ```
 
-If an accessor is used to hide a class property, the hidden property may be prefixed or suffixed with any whole word, like `internal` or `wrapped`. When using these private properties, access the value through the accessor whenever possible. At least one accessor for a property must be non-trivial: do not define "pass-through" accessors only for the purpose of hiding a property. Instead, make the property public (or consider making it `readonly` rather than just defining a getter with no setter).
+声明访问器的作用尽量不只是为了保护一个属性的私密性,而且提供更丰富的访问器能力.如果单纯为了保护属性的可访问性, 使用`private`或者`public`即可.如下所示:
 
 ```ts
 // Good
 class Foo {
   private wrappedBar = "";
   get bar() {
-    return this.wrappedBar || "bar";
+      return this.wrappedBar || "bar";
   }
 
   set bar(wrapped: string) {
-    this.wrappedBar = wrapped.trim();
+      this.wrappedBar = wrapped.trim();
   }
 }
 ```
@@ -577,22 +571,22 @@ class Foo {
 ```ts
 // Bad
 class Bar {
-  private barInternal = "";
+    private barInternal = "";
 
   // Neither of these accessors have logic, so just make bar public.
   get bar() {
-    return this.barInternal;
+      return this.barInternal;
   }
 
   set bar(value: string) {
-    this.barInternal = value;
+      this.barInternal = value;
   }
 }
 ```
 
 ### Primitive Types & Wrapper Classes
 
-> TypeScript code must not instantiate the wrapper classes for the primitive types `String`, `Boolean`, and `Number`. Wrapper classes have surprising behaviour, such as `new Boolean(false)` evaluating to `true`.
+> 不要实例化TypeScript代码原始类型 `String`, `Boolean`, 和 `Number` 的包装类.
 
 ```ts
 // Bad
@@ -610,7 +604,7 @@ const n = 5;
 
 ### Array constructor
 
-TypeScript code must not use the `Array()` constructor, with or without `new`. It has confusing and contradictory usage:
+不要使用 `Array()` 构造函数, 无论有还是没有 `new`. 它有令人困惑和矛盾的用法:
 
 ```ts
 // Bad
@@ -618,7 +612,7 @@ const a = new Array(2); // [undefined, undefined]
 const b = new Array(2, 3); // [2, 3];
 ```
 
-Instead, always use bracket notation to initialize arrays, or `from` to initialize an `Array` with a certain size:
+相反，总是使用括号表示法来初始化数组, 或者 使用 `from` 去初始化一个长度固定的 `Array` :
 
 ```ts
 // Good
@@ -635,7 +629,7 @@ Array.from<number>({ length: 5 }).fill(0);
 
 ### Type coercion
 
-TypeScript code may use the `String()` and `Boolean()` (note: no `new`!) functions, string template literals, or `!!` to coerce types.
+可以使用 `String()` 和 `Boolean()` (注意: 没有 `new`!) 函数, 字符串字面量模板, 或者 `!!` 强制类型.
 
 ```ts
 const bool = Boolean(false);
@@ -644,11 +638,11 @@ const bool2 = !!str;
 const str2 = `result: ${bool2}`;
 ```
 
-Using string concatenation to cast to string is discouraged, as we check that operands to the plus operator are of matching types.
+不要使用字符串连接(`'xxx' + 'xxxx'`)强制转换为string，因为要检查加号操作符的操作数是否具有匹配的类型。
 
-Code must use `Number()` to parse numeric values, and *must* check its return for `NaN` values explicitly, unless failing to parse is impossible from context.
+使用 `Number()`去转换数字类型, 并且*必须*显式地检查其返回的“NaN”值，除非从上下文不可能解析失败.
 
-Note: `Number()`, `Number( )`, and `Number(\t)` would return `0` instead of `NaN`. `Number(Infinity)` and `Number(-Infinity)` would return `Infinity` and `-Infinity` respectively. These cases may require special handling.
+注意: `Number()`, `Number( )`, 和 `Number(\t)` 将会返回 `0` 而不是 `NaN`. `Number(Infinity)` 和 `Number(-Infinity)` 将会分别返回`Infinity` 和 `-Infinity`. 这些情况可能需要特殊处理.
 
 ```ts
 const aNumber = Number('123');
@@ -656,14 +650,14 @@ if (isNaN(aNumber)) throw new Error(...); // Handle NaN if the string might not 
 assertFinite(aNumber, ...); // Optional: if NaN cannot happen because it was validated before.
 ```
 
-Code must not use unary plus (`+`) to coerce strings to numbers. Parsing numbers can fail, has surprising corner cases, and can be a code smell (parsing at the wrong layer). A unary plus is too easy to miss in code reviews given this.
+不要使用意愿加号 (`+`) 将字符串强制转换为数字.
 
 ```ts
 // Bad
 const x = +y;
 ```
 
-Code must also not use `parseInt` or `parseFloat` to parse numbers, except for non-base-10 strings (see below). Both of those functions ignore trailing characters in the string, which can shadow error conditions (e.g. parsing `12 dwarves` as `12`).
+也不要使用 `parseInt` 或者 `parseFloat` 去转换数字. 这两个函数都忽略字符串中的末尾字符.
 
 ```ts
 //bad
@@ -671,7 +665,7 @@ const n = parseInt(someString, 10); // Error prone,
 const f = parseFloat(someString); // regardless of passing a radix.
 ```
 
-Code that must parse using a radix *must* check that its input is a number before calling into `parseInt`;
+如果要使用`parseInt`转换进制, 必须先检查转换字符串中是否包含字符.
 
 ```ts
 // Good
@@ -681,7 +675,7 @@ if (!/^[a-fA-F0-9]+$/.test(someString)) throw new Error(...);
 const n = parseInt(someString, 16); // Only allowed for radix != 10
 ```
 
-Use `Number()` followed by `Math.floor` or `Math.trunc` (where available) to parse integer numbers:
+使用 `Number()` 紧跟着 `Math.floor` 或者 `Math.trunc` 来转换整型数字:
 
 ```ts
 // Good
@@ -690,7 +684,7 @@ if (isNaN(f)) handleError();
 f = Math.floor(f);
 ```
 
-Do not use explicit boolean coercions in conditional clauses that have implicit boolean coercion. Those are the conditions in an `if`, `for` and `while` statements.
+不要在含有隐式布尔强制的条件从句中使用显式布尔强制转换`!!`. 比如在 `if`, `for` 和 `while` 语句中的条件.
 
 ```ts
 // Bad
@@ -706,7 +700,7 @@ if (foo) {...}
 while (foo) {...}
 ```
 
-Code may use explicit comparisons:
+代码应该使用显式比较:
 
 ```ts
 // Explicitly comparing > 0 is OK:
@@ -717,24 +711,24 @@ if (arr.length) {...}
 
 ### Variables
 
-Always use `const` or `let` to declare variables. Use `const` by default, unless a variable needs to be reassigned. Never use `var`.
+永远使用 `const` 或 `let` 来声明变量. 默认使用 `const`, 除非变量要被重新赋值. 否则不要使用 `var`.
 
 ```ts
 const foo = otherValue; // Use if "foo" never changes.
 let bar = someValue; // Use if "bar" is ever assigned into later on.
 ```
 
-`const` and `let` are block scoped, like variables in most other languages. `var` in JavaScript is function scoped, which can cause difficult to understand bugs. Dont use it.
+`const` 和 `let` 是块级作用域. `var` 在JS中是函数级作用域, 这可能导致难以理解的bug.
 
 ```ts
 var foo = someValue; // Don't use - var scoping is complex and causes bugs.
 ```
 
-Variables must not be used before their declaration.
+变量在声明之前不能使用
 
 ### Exceptions
 
-Always use `new Error()` when instantiating exceptions, instead of just calling `Error()`. Both forms create a new `Error` instance, but using `new` is more consistent with how other objects are instantiated.
+实例化一个异常的时候应该总是使用 `new Error()`, 不要去调用 `Error()`方法. 这两种形式都是去创建一个 `Error` 实例, 但使用 `new` 与其他实例化对象的方式更加一致.
 
 ```ts
 // Good
@@ -748,9 +742,9 @@ throw Error("Foo is not a valid bar.");
 
 ### Iterating objects
 
-Iterating objects with `for (... in ...)` is error prone. It will include enumerable properties from the prototype chain.
+迭代对象使用 `for (... in ...)` 容易出错. 它将包括`prototype`中的可枚举属性
 
-Do not use unfiltered `for (... in ...)` statements:
+不要使用未过滤原型链的 `for (... in ...)` 语句:
 
 ```ts
 // Bad
@@ -759,9 +753,7 @@ for (const x in someObj) {
 }
 ```
 
-Either filter values explicitly with an `if` statement, or use `for (... of Object.keys(...))`.
-
-WARNING: Some optimizers like Closure Compiler will rename and/or remove properties on objects, iterating properties is only safe if theyve been defined using `[quoted]` access.
+使用 `if` 语句显式地筛选值 , 或者使用 `for (... of Object.keys(...))`.
 
 ```ts
 // Good
@@ -781,16 +773,16 @@ for (const [key, value] of Object.entries(someObj)) {
 
 ### Iterating containers
 
-Do not use `for (... in ...)` to iterate over arrays. It will counterintuitively give the arrays indices (as strings!), not values:
+不要使用 `for (... in ...)` 去迭代数组. 它将给数组提供索引(作为字符串!)，而不是值的索引:
 
 ```ts
 // Bad
 for (const x in someArray) {
-  // x is the index!
+    // x is the index!
 }
 ```
 
-Use `for (... of someArr)` or vanilla `for` loops with indices to iterate over arrays.
+使用 `for (... of someArr)`或者 `for` 带索引的循环遍历数组.
 
 ```ts
 // Good
@@ -808,35 +800,35 @@ for (const [i, x] of someArr.entries()) {
 }
 ```
 
-Do not use `Array.prototype.forEach`, `Set.prototype.forEach`, and `Map.prototype.forEach`. They make code harder to debug and defeat some useful compiler checks (e.g. reachability).
+不要使用 `Array.prototype.forEach`, `Set.prototype.forEach`, 和 `Map.prototype.forEach`. 它们使代码更难调试，并破坏了一些有用的编译器检查(例如可达性).
 
 ```ts
 // Bad
 someArr.forEach((item, index) => {
-  someFn(item, index);
+    someFn(item, index);
 });
 ```
 
->Why?
+> 为什么?
 >
-> Consider this code:
+> 看下这段代码:
 >
 > ```ts
 > let x: string | null = "abc";
 > myArray.forEach(() => {
->   x.charAt(0);
+>     x.charAt(0);
 > });
 > ```
 >
-> You can recognize that this code is fine: `x` isnt null and it doesnt change before it is accessed. But the compiler cannot know that this `.forEach()` call doesnt hang on to the closure that was passed in and call it at some later point, maybe after `x` was set to null, so it flags this code as an error. The equivalent for-of loop is fine.
+> `x` 不是 null 而在它被访问之前不会改变. 但是编译器无法知道这个 `.forEach()` 调用没有挂起传递进来的闭包，并在稍后的某个点上调用它, 可能是在 `x` 被设为null之后, 所以编译器会将此代码标记为错误。 而使用for-of循环就不会被标记为错误了
 >
 > [See the error and non-error in the playground](https://www.typescriptlang.org/play/?#code/DYUwLgBAHgXBDOYBOBLAdgcwD5oK7GAgF4IByAQwCMBjUgbgCgBtAXQDoAzAeyQFFzqACwAUwgJTEAfBADeDCNDZDySAIJhhABjGMAvjoYNQkAJ5xEqTDnyESFGvQbckEYdS5pEEAPoQuHCFYJOQUTJUEVdS0DXQYgA)
 >
-> In practice, variations of this limitation of control flow analysis show up in more complex codepaths where it is more surprising.
+> 在实践中，控制流分析的这种限制的变化出现在更复杂的代码路径中
 
 ### Using the spread operator
 
-Using the spread operator `[...foo]; {...bar}` is a convenient shorthand for copying arrays and objects. When using the spread operator on objects, later values replace earlier values at the same key.
+使用拓展运算符 `[...foo]; {...bar}` 去浅克隆数组和对象. When using the spread operator on objects, later values replace earlier values at the same key.
 
 ```ts
 const foo = {
