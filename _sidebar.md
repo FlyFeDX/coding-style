@@ -9,4 +9,4 @@
 - 手机 App
 
 - 管理规范
-  - [Git Commit 提交规范](./docs/GitCommit.md)
+  - [Git Commit 提交规范](./docs/Git-Commit.md)
