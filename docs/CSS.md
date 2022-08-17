@@ -1,6 +1,6 @@
 # CSS / Sass Styleguide
 
-*CSS and Less 开发实践*
+*CSS 和 Less 开发实践*
 
 ## Table of Contents
 
@@ -67,7 +67,7 @@
 
 - 缩进使用4个空格 (4 spaces).
 - 类命名使用`-`间隔单词, 不要使用驼峰.
-  - 如果使用BEM, 则 下划线 和 PascalCase(大驼峰) 模式也可以 (see [OOCSS and BEM](#oocss-and-bem) below).
+  - 如果使用BEM, 则 下划线 和 PascalCase(大驼峰) 模式也可以 (看一下 [OOCSS and BEM](#oocss-and-bem)).
 - 尽量不要使用ID选择器.
 - 多个选择器同时作用时, 给每个选择器独立一行.
 - 在大括号 `{` 之前保留一个空格.

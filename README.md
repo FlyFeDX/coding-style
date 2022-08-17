@@ -1,6 +1,6 @@
 # coding-style
 
-我们的项目基于 airbnb and TypeScript 编码规范, 并且 fork 了相关项目针对我们 FeDX 团队自身需求做了调整.
+我们的项目基于 airbnb 和 TypeScript 官方的编码规范, 我 `fork` 了相关项目并且针对我们 FeDX 团队自身需求做了调整.
 
 ## 目录结构
 
