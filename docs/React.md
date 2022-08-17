@@ -37,18 +37,18 @@ React 编码风格指南主要是基于 JavaScript 中目前流行的标准，�
   ```jsx
   // bad
   const Listing = React.createClass({
-    // ...
-    render() {
-      return <div>{this.state.hello}</div>
-    },
+      // ...
+      render() {
+          return <div>{this.state.hello}</div>;
+      },
   })
 
   // good
   class Listing extends React.Component {
-    // ...
-    render() {
-      return <div>{this.state.hello}</div>
-    }
+      // ...
+      render() {
+          return <div>{this.state.hello}</div>;
+      }
   }
   ```
 
@@ -57,17 +57,17 @@ React 编码风格指南主要是基于 JavaScript 中目前流行的标准，�
   ```jsx
   // bad
   class Listing extends React.Component {
-    render() {
-      return <div>{this.props.hello}</div>
-    }
+      render() {
+          return <div>{this.props.hello}</div>;
+      }
   }
 
   // bad (relying on function name inference is discouraged)
-  const Listing = ({ hello }) => <div>{hello}</div>
+  const Listing = ({ hello }) => <div>{hello}</div>;
 
   // good
   function Listing({ hello }) {
-    return <div>{hello}</div>
+      return <div>{hello}</div>;
   }
   ```
 
@@ -86,29 +86,29 @@ React 编码风格指南主要是基于 JavaScript 中目前流行的标准，�
 
   ```jsx
   // bad
-  import reservationCard from './ReservationCard'
+  import reservationCard from './ReservationCard';
 
   // good
-  import ReservationCard from './ReservationCard'
+  import ReservationCard from './ReservationCard';
 
   // bad
-  const ReservationItem = <ReservationCard />
+  const ReservationItem = <ReservationCard />;
 
   // good
-  const reservationItem = <ReservationCard />
+  const reservationItem = <ReservationCard />;
   ```
 
 - **组件命名**: 使用文件名作为组件名. 例如, `ReservationCard.jsx` 应该用 `ReservationCard`作为组件名. 但是, 对于一个文件夹里的根组件, 需要用 `index.jsx` 作为文件名，同时用文件夹名的大驼峰形式作为组件名:
 
   ```jsx
   // bad
-  import Footer from './footer-component/Footer'
+  import Footer from './footer-component/Footer';
 
   // bad
-  import Footer from './footer-component/index'
+  import Footer from './footer-component/index';
 
   // good
-  import Footer from './footer-component'
+  import Footer from './footer-component';
   ```
 
 - **高阶组件命名**: 用高阶组件名和传入的组件名组合作为生成的组件的 displayName. 举个例子，一个高阶组件 withFoo(),当传入一个组件 Bar 应该生成一个新的组件，他的 displayName 属性是 withFoo(Bar).
@@ -119,21 +119,20 @@ React 编码风格指南主要是基于 JavaScript 中目前流行的标准，�
   // bad
   export default function withFoo(WrappedComponent) {
     return function WithFoo(props) {
-      return <WrappedComponent {...props} foo />
+      return <WrappedComponent {...props} foo />;
     }
   }
 
   // good
   export default function withFoo(WrappedComponent) {
-    function WithFoo(props) {
-      return <WrappedComponent {...props} foo />
-    }
+      function WithFoo(props) {
+          return <WrappedComponent {...props} foo />;
+      }
 
-    const wrappedComponentName =
-      WrappedComponent.displayName || WrappedComponent.name || 'Component'
+      const wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
-    WithFoo.displayName = `withFoo(${wrappedComponentName})`
-    return WithFoo
+      WithFoo.displayName = `withFoo(${wrappedComponentName})`;
+      return WithFoo;
   }
   ```
 
@@ -143,13 +142,13 @@ React 编码风格指南主要是基于 JavaScript 中目前流行的标准，�
 
   ```jsx
   // bad
-  <MyComponent style="fancy" />
+  <MyComponent style="fancy" />;
 
   // bad
-  <MyComponent className="fancy" />
+  <MyComponent className="fancy" />;
 
   // good
-  <MyComponent variant="fancy" />
+  <MyComponent variant="fancy" />;
   ```
 
 ## Declaration
@@ -159,8 +158,8 @@ React 编码风格指南主要是基于 JavaScript 中目前流行的标准，�
   ```jsx
   // bad
   export default React.createClass({
-    displayName: 'ReservationCard',
-    // stuff goes here
+      displayName: 'ReservationCard',
+      // stuff goes here
   })
 
   // good
@@ -367,16 +366,16 @@ React 编码风格指南主要是基于 JavaScript 中目前流行的标准，�
 
 ```jsx
 function HOC(WrappedComponent) {
-  return class Proxy extends React.Component {
-    Proxy.propTypes = {
-      text: PropTypes.string,
-      isLoading: PropTypes.bool
-    };
+    return class Proxy extends React.Component {
+        Proxy.propTypes = {
+            text: PropTypes.string,
+            isLoading: PropTypes.bool
+        };
 
-    render() {
-      return <WrappedComponent {...this.props} />
+        render() {
+            return <WrappedComponent {...this.props} />;
+        }
     }
-  }
 }
 ```
 
@@ -384,26 +383,26 @@ function HOC(WrappedComponent) {
 
 ```jsx
 export default function Foo {
-  const props = {
-    text: '',
-    isPublished: false
-  }
+    const props = {
+        text: '',
+        isPublished: false
+    };
 
-  return (<div {...props} />);
+    return (<div {...props} />);
 }
 ```
 
 ```jsx
 // bad
 render() {
-  const { irrelevantProp, ...restProps } = this.props;
-  return <WrappedComponent {...this.props} />
+    const { irrelevantProp, ...restProps } = this.props;
+    return <WrappedComponent {...this.props} />;
 }
 
 // good
 render() {
-  const { irrelevantProp, ...restProps } = this.props;
-  return <WrappedComponent {...restProps} />
+    const { irrelevantProp, ...restProps } = this.props;
+    return <WrappedComponent {...restProps} />;
 }
 ```
 
@@ -431,7 +430,7 @@ render() {
   // bad
   render() {
     return <MyComponent variant="long body" foo="bar">
-             <MyChild />
+              <MyChild />
            </MyComponent>;
   }
 
@@ -439,15 +438,15 @@ render() {
   render() {
     return (
       <MyComponent variant="long body" foo="bar">
-        <MyChild />
+          <MyChild />
       </MyComponent>
     );
   }
 
   // good, when single line
   render() {
-    const body = <div>hello</div>;
-    return <MyComponent>{body}</MyComponent>;
+      const body = <div>hello</div>;
+      return <MyComponent>{body}</MyComponent>;
   }
   ```
 
@@ -473,8 +472,8 @@ render() {
 
   // good
   <Foo
-    bar="bar"
-    baz="baz"
+      bar="bar"
+      baz="baz"
   />
   ```
 
@@ -484,18 +483,18 @@ render() {
 
   ```jsx
   function ItemList(props) {
-    return (
-      <ul>
-        {props.items.map((item, index) => (
-          <Item
-            key={item.key}
-            onClick={(event) => {
-              doSomethingWith(event, item.name, index)
-            }}
-          />
-        ))}
-      </ul>
-    )
+      return (
+          <ul>
+              {props.items.map((item, index) => (
+                  <Item
+                      key={item.key}
+                      onClick={(event) => {
+                          doSomethingWith(event, item.name, index)
+                      }}
+                  />
+              ))}
+          </ul>
+      )
   }
   ```
 
@@ -504,20 +503,20 @@ render() {
   ```jsx
   // bad
   React.createClass({
-    _onClickSubmit() {
-      // do stuff
-    },
+      _onClickSubmit() {
+        // do stuff
+      },
 
     // other stuff
   });
 
   // good
   class extends React.Component {
-    onClickSubmit() {
-      // do stuff
-    }
+      onClickSubmit() {
+        // do stuff
+      }
 
-    // other stuff
+      // other stuff
   }
   ```
 
@@ -526,12 +525,12 @@ render() {
   ```jsx
   // bad
   render() {
-    (<div />);
+      (<div />);
   }
 
   // good
   render() {
-    return (<div />);
+      return (<div />);
   }
   ```
 
@@ -546,12 +545,12 @@ render() {
 
   // bad
   const handleClick = () => {
-    props.methodFromParentComponent();
+      props.methodFromParentComponent();
   }
 
   // good
   const handleClick = () => {
-    props.onClick();
+      props.onClick();
   }
   ```
 
@@ -591,27 +590,27 @@ render() {
   import PropTypes from 'prop-types'
 
   const propTypes = {
-    id: PropTypes.number.isRequired,
-    url: PropTypes.string.isRequired,
-    text: PropTypes.string,
+      id: PropTypes.number.isRequired,
+      url: PropTypes.string.isRequired,
+      text: PropTypes.string,
   }
 
   const defaultProps = {
-    text: 'Hello World',
+      text: 'Hello World',
   }
 
   class Link extends React.Component {
-    static methodsAreOk() {
-      return true
-    }
+      static methodsAreOk() {
+          return true;
+      }
 
-    render() {
-      return (
-        <a href={this.props.url} data-id={this.props.id}>
-          {this.props.text}
-        </a>
-      )
-    }
+      render() {
+          return (
+              <a href={this.props.url} data-id={this.props.id}>
+                  {this.props.text}
+              </a>
+          );
+      }
   }
 
   Link.propTypes = propTypes
@@ -620,38 +619,38 @@ render() {
   export default Link
   ```
 
-* 在 TypeScript 中如何去 Props 和 states 定义类型.
+- 在 TypeScript 中如何去 Props 和 states 定义类型.
 
   ```tsx
   import React from 'react'
 
   interface IProps {
-    id: number
-    url: string
-    text?: string
+      id: number;
+      url: string;
+      text?: string;
   }
 
   interface IStates {}
 
   class Link extends React.Component<IProps, IStates> {
-    static methodsAreOk() {
-      return true
-    }
+      static methodsAreOk() {
+        return true;
+      }
 
     render() {
-      const { id, url, text = 'Hello World' } = this.props
-      return (
-        <a href={url} data-id={id}>
-          {text}
-        </a>
-      )
+        const { id, url, text = 'Hello World' } = this.props;
+        return (
+            <a href={url} data-id={id}>
+                {text}
+            </a>
+        );
     }
   }
 
-  export default Link
+  export default Link;
   ```
 
-* 在类组件中不要使用如下废弃的生命周期:
+- 在类组件中不要使用如下废弃的生命周期:
 
 1. `UNSAFE_componentWillMount`
 2. `UNSAFE_componentWillReceiveProps`
@@ -676,41 +675,41 @@ render() {
 
 ```tsx
 const Link = forwardRef(function (props, ref) {
-  const {} = useContext(context)
-  const [count, setCount] = useState(0)
-  const wrapper = useRef(null)
+  const {} = useContext(context);
+  const [count, setCount] = useState(0);
+  const wrapper = useRef(null);
 
   useImperativeHandle(ref, () => ({
-    resetCount: () => {
-      setCount(0)
-    },
+      resetCount: () => {
+          setCount(0);
+      },
   }))
 
-  const getXXX = () => {}
+  const getXXX = () => {};
 
   useEffect(() => {
-    // do something ...
-  }, [])
+      // do something ...
+  }, []);
 
   useLayoutEffect(() => {
-    // do something ...
-  }, [])
+      // do something ...
+  }, []);
 
   const momiziedValue = useMemo(() => {
-    // calculate some value
-    return 0
-  }, [])
+      // calculate some value
+      return 0;
+  }, []);
 
-  const handleXXX = () => {}
+  const handleXXX = () => {};
 
-  const onXXX = () => {}
+  const onXXX = () => {};
 
-  const renderXXX = () => {}
+  const renderXXX = () => {};
 
-  return <div>{momiziedValue}</div>
+  return <div>{momiziedValue}</div>;
 })
 
-export default Link
+export default Link;
 ```
 
 ## `isMounted`
