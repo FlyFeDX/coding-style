@@ -13,7 +13,7 @@
 * style： 格式（不影响代码运行的变动）
 * refactor：重构（即不是新增功能，也不是修改bug的代码变动）
 * chore：构建过程或辅助工具的变动
-* revert:   执行git revert打印的message
+* revert:   执行 git revert 打印的message
 
 ## Scope（可选）
 

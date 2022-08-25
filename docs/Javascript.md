@@ -809,13 +809,13 @@ const good = {
   ```javascript
   // bad
   function concatenateAll() {
-    const args = Array.prototype.slice.call(arguments)
-    return args.join('')
+      const args = Array.prototype.slice.call(arguments);
+      return args.join('');
   }
 
   // good
   function concatenateAll(...args) {
-    return args.join('')
+      return args.join('');
   }
   ```
 
@@ -2383,44 +2383,44 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
 
   // bad
   function dogs() {
-    if (x) {
-        return x;
-    } else {
-        if (y) {
-            return y;
-        }
-    }
+      if (x) {
+          return x;
+      } else {
+          if (y) {
+              return y;
+          }
+      }
   }
 
   // good
   function foo() {
-    if (x) {
-        return x;
-    }
+      if (x) {
+          return x;
+      }
 
-    return y;
+      return y;
   }
 
   // good
   function cats() {
-    if (x) {
-        return x;
-    }
+      if (x) {
+          return x;
+      }
 
-    if (y) {
-        return y;
-    }
+      if (y) {
+          return y;
+      }
   }
 
   // good
   function dogs(x) {
-    if (x) {
-        if (z) {
-            return y;
-        }
-    } else {
-        return z;
-    }
+      if (x) {
+          if (z) {
+              return y;
+          }
+      } else {
+          return z;
+      }
   }
   ```
 
@@ -2514,7 +2514,6 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
   // @return {Element} element
   function make(tag) {
       // ...
-
       return element
   }
 
@@ -2525,7 +2524,6 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
    */
   function make(tag) {
       // ...
-
       return element
   }
   ```
@@ -2590,7 +2588,6 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
    */
   function make(tag) {
       // ...
-
       return element
   }
 
@@ -2618,7 +2615,6 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
   class Calculator extends Abacus {
       constructor() {
           super()
-
           // FIXME: shouldn’t use a global here
           total = 0
       }
@@ -2633,7 +2629,6 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
   class Calculator extends Abacus {
       constructor() {
           super()
-
           // TODO: total should be configurable by an options param
           this.total = 0
       }
@@ -2919,22 +2914,22 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
   class Person {
       constructor(fullName, email, birthday) {
           this.fullName = fullName;
-
-
+          // 空白行 
+          // 空白行 
           this.email = email;
-
-
+          // 空白行 
+          // 空白行 
           this.setAge(birthday);
       }
 
 
       setAge(birthday) {
           const today = new Date();
-
-
+          // 空白行 
+          // 空白行 
           const age = this.getAge(today, birthday);
-
-
+          // 空白行 
+          // 空白行 
           this.age = age;
       }
 
