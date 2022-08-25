@@ -738,9 +738,7 @@ const good = {
   }
   foo = 100;
 
-
   // good
-
   const a = function() {};
 
   for (let i=10; i; i--) {
