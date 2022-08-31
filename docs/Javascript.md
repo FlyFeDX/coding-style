@@ -41,7 +41,7 @@
 
 <a name="types--primitives"></a><a name="1.1"></a>
 
-- [1.1](#types--primitives) **值类型**: 修改值类型相当于修改了值本身.
+- [1.1](#types--primitives) **值类型**: 主要指的是基本类型（primitive）,修改值类型相当于修改了值本身.
 
   - `string`
   - `number`
@@ -60,15 +60,16 @@
   console.log(foo, bar) // => 1, 9
   ```
 
-  - 注意 Symbols 和 BigInts 的浏览器兼容性.
+  - 注意 Symbols 和 BigInts 的浏览器兼容性:此2个数据类型都不兼容IE
 
 <a name="types--complex"></a><a name="1.2"></a>
 
-- [1.2](#types--complex) **引用类型**: 引用类型变量的赋值只赋值对对象的引用, 而不赋值对象本身.
+- [1.2](#types--complex) **引用类型**: 主要指对象（object）类型，引用类型变量的赋值只赋值对对象的引用, 而不赋值对象本身.
 
   - `object`
   - `array`
   - `function`
+  - `date`
 
   ```javascript
   const foo = [1, 2]
@@ -645,6 +646,18 @@ const good = {
 <a name="strings--eval"></a><a name="6.5"></a>
 
 - [6.4](#strings--eval) 非万不得已不要使用 `eval()`, 它可能造成很多的隐患. eslint: [`no-eval`](https://eslint.org/docs/rules/no-eval)
+
+  ```javascript
+  // bad
+  const obj = { x: 'foo' };
+  const key = 'x';
+  const value = eval('obj.' + key);
+
+  // good
+  const obj = { x: 'foo' };
+  const key = 'x';
+  const value = obj[key];
+  ```
 
 <a name="strings--escaping"></a>
 
