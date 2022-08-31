@@ -2840,9 +2840,9 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
 
   // good
   const obj = {
-    foo() {},
+      foo() {},
 
-    bar() {},
+      bar() {},
   }
 
   return obj
@@ -2946,55 +2946,54 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
           this.age = age;
       }
 
-
-        getAge(today, birthday) {
+      getAge(today, birthday) {
           // ..
-        }
-    }
+      }
+  }
 
-    // good
-    class Person {
-        constructor(fullName, email, birthday) {
-            this.fullName = fullName;
-            this.email = email;
-            this.setAge(birthday);
-        }
+  // good
+  class Person {
+      constructor(fullName, email, birthday) {
+          this.fullName = fullName;
+          this.email = email;
+          this.setAge(birthday);
+      }
 
-        setAge(birthday) {
-            const today = new Date();
-            const age = getAge(today, birthday);
-            this.age = age;
-        }
+      setAge(birthday) {
+          const today = new Date();
+          const age = getAge(today, birthday);
+          this.age = age;
+      }
 
-        getAge(today, birthday) {
-            // ..
-        }
-    }
-    ```
+      getAge(today, birthday) {
+          // ..
+      }
+  }
+  ```
 
 <a name="whitespace--in-parens"></a><a name="18.9"></a>
 
 - [19.10](#whitespace--in-parens) 小括号内容两边不要加空格. eslint: [`space-in-parens`](https://eslint.org/docs/rules/space-in-parens.html)
 
-```javascript
+  ```javascript
   // bad
   function bar( foo ) {
-    return foo;
+      return foo;
   }
 
   // good
   function bar(foo) {
-    return foo;
+      return foo;
   }
 
   // bad
   if ( foo ) {
-    console.log(foo);
+      console.log(foo);
   }
 
   // good
   if (foo) {
-    console.log(foo);
+      console.log(foo);
   }
   ```
 
@@ -3454,12 +3453,12 @@ const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
   ```javascript
   // bad
   function q() {
-    // ...
+      // ...
   }
 
   // good
   function query() {
-    // ...
+      // ...
   }
   ```
 
