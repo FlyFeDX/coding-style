@@ -1498,9 +1498,9 @@ import fizz from "./foo";
 ```ts
 // Bad
 export default class Foo {
-static SOME*CONSTANT = ...
-static someHelpfulFunction() { ... }
-  ...
+    static SOME*CONSTANT = ...
+    static someHelpfulFunction() { ... }
+    ...
 }
 ```
 
@@ -1562,7 +1562,7 @@ export const SomeApi = pickApi();
 不要为了 `namespace` 而创建带有静态方法或属性的容器类.
 
 ```ts
-> // Bad
+// Bad
 export class Container {
     static FOO = 1;
     static bar() {
@@ -1576,7 +1576,7 @@ export class Container {
 ```ts
 export const FOO = 1;
 export function bar() {
-  return 1;
+    return 1;
 }
 ```
 
