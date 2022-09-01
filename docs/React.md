@@ -80,7 +80,7 @@ React 编码风格指南主要是基于 JavaScript 中目前流行的标准，�
 ## Naming
 
 - **拓展名**: 用 `.jsx` 或 `.tsx` 作为 React 组件 的拓展名. eslint: [`react/jsx-filename-extension`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md)
-- **文件命名**: 使用大驼峰命名. 比如, `reservationCard.jsx`.
+- **文件命名**: 使用大驼峰命名. 比如, `ReservationCard.jsx`.
 - **文件夹命名**: 如果是文件夹包含的组件簇, 每个单词小写, 使用中划线命名规则. 比如, `checkbox-number/*`
 - **引用命名**: React 组件使用大驼峰命名,组件的实例用小驼峰命名. eslint: [`react/jsx-pascal-case`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md).
 
@@ -565,6 +565,24 @@ render() {
 - useState 中,设置值的方法必须用 `set` 开头. 例如 `const [count, setCount] = useState(0);`
 - 不要忘记一些 `Hooks` 的依赖, 如 `useCallback` 和 `useEffect` 等等.
 - 当在`useEffect`中添加事件监听器时，在返回函数中删除事件监听器是很重要的。同理: `setTimeout`, `setInterval` 和 `requestAnimationFrame`.
+  ```tsx
+  // bad
+  useEffect(() => {
+      timer = setTimeout(() => {
+         //执行方法
+      }, 1000)
+  }, [number])
+
+  // good
+  useEffect(() => {
+      timer = setTimeout(() => {
+        //执行方法
+      }, 1000)
+      return () => {
+      clearTimeOut(timer)
+    }
+  }, [number])
+  ```
 
 ## Ordering
 
